@@ -28,7 +28,7 @@ public class IndexDataService {
     @Autowired RestTemplate restTemplate;
  
     @HystrixCommand(fallbackMethod = "third_part_not_connected")
-    public List<IndexData> fresh(String code) {
+    public List<IndexData> refresh(String code) {
         List<IndexData> indexeDatas =fetch_indexes_from_third_part(code);
          
         indexDatas.put(code, indexeDatas);
