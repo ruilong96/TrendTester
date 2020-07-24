@@ -1,13 +1,16 @@
 package market.trend.service;
  
 import market.trend.tool.Index;
+import market.trend.util.SpringContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.collection.CollUtil;
  
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +23,30 @@ public class IndexService {
     @Autowired RestTemplate restTemplate;
 
     @HystrixCommand(fallbackMethod = "third_part_not_connected")
+    public List<Index> refresh() {
+        indexes =fetch_indexes_from_third_party();
+        IndexService indexService = SpringContextUtil.getBean(IndexService.class);
+        indexService.remove();
+        return indexService.store();
+    }
+
+    @CacheEvict(allEntries=true)
+    public void remove(){
+
+    }
+
     @Cacheable(key="'all_codes'")
-    public List<Index> fetch_indexes_from_third_part(){
+    public List<Index> store(){
+        System.out.println(this);
+        return indexes;
+    }
+
+    @Cacheable(key="'all_codes'")
+    public List<Index> get(){
+        return CollUtil.toList();
+    }
+
+    public List<Index> fetch_indexes_from_third_party(){
         List<Map> temp= restTemplate.getForObject("http://127.0.0.1:8090/indexes/codes.json",List.class);
         return map2Index(temp);
     }
