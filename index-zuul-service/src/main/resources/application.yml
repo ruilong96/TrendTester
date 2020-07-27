@@ -10,6 +10,9 @@ zuul:
     api-a:
       path: /api-codes/**
       serviceId: INDEX-CODES-SERVICE
+    api-b:
+        path: /api-backtest/**
+        serviceId: TREND-TRADING-BACKTEST-SERVICE
 hystrix:
   command:
     default:
@@ -22,11 +25,3 @@ hystrix:
 ribbon:
   ReadTimeout: 60000
   ConnectTimeout: 60000
-
-zuul:
-  max:
-    host:
-      connections: 500
-  host:
-    socket-timeout-millis: 60000
-    connect-timeout-millis: 60000
