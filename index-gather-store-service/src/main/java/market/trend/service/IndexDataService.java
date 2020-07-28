@@ -34,7 +34,7 @@ public class IndexDataService {
         indexDatas.put(code, indexeDatas);
          
         System.out.println("code:"+code);
-        System.out.println("indexeDatas:"+indexDatas.get(code).size());
+        System.out.println("indexeData:"+indexDatas.get(code).size());
          
         IndexDataService indexDataService = SpringContextUtil.getBean(IndexDataService.class);
         indexDataService.remove(code);

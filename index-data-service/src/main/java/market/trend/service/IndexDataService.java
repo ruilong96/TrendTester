@@ -10,7 +10,7 @@ import market.trend.tool.IndexData;
 import cn.hutool.core.collection.CollUtil;
  
 @Service
-@CacheConfig(cacheNames="index_data")
+@CacheConfig(cacheNames="index_datas")
 public class IndexDataService {
  
     @Cacheable(key="'indexData-code-'+ #p0")

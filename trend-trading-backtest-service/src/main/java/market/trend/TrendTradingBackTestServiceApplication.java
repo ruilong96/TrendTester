@@ -52,7 +52,7 @@ public class TrendTradingBackTestServiceApplication {
                 while(true) {
                     String strPort = scanner.nextLine();
                     if(!NumberUtil.isInteger(strPort)) {
-                        System.err.println("number only");
+                        System.err.println("illegal input");
                         continue;
                     }
                     else {
