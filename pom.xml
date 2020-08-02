@@ -9,6 +9,13 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>eureka-server</module>
+    <module>third-party-index-data-project</module>
+    <module>index-gather-store-service</module>
+      <module>index-codes-service</module>
+      <module>index-data-service</module>
+      <module>index-zuul-service</module>
+    <module>trend-trading-backtest-service</module>
+      <module>trend-trading-backtest-view</module>
   </modules>
 
   <!--<name>trendParentProject</name>-->
